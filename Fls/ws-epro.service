@@ -5,7 +5,7 @@ After=syslog.target network-online.target
 [Service]
 User=root
 NoNewPrivileges=true
-ExecStart=/usr/bin/ws-epro -f /usr/bin/tun.conf
+ExecStart=/usr/bin/ws-epro -f /usr/bin/config.yml
 Restart=on-failure
 RestartPreventExitStatus=23
 LimitNPROC=10000
