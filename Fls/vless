@@ -7,7 +7,7 @@ TIME="10"
 URL="https://api.telegram.org/bot$KEY/sendMessage"
 TEXT="
 <code>────────────────────</code>
-<b>⚠️QUOTA EXPIRED NOTIFICATION XRAY VLESS⚠️</b>
+<b>⚠️NOTIF QUOTA HABIS XRAY VLESS ⚠️</b>
 <code>────────────────────</code>
 <code>Username  : </code><code>$user</code>
 <code>Limit Quota: </code><code>$total2</code>
