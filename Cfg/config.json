@@ -42,7 +42,6 @@
         "clients": [
           {
             "id": "1d1c1d94-6987-4658-a4dc-8821a30fe7e0"
-#vless
           }
         ]
       },
@@ -62,7 +61,6 @@
           {
             "id": "1d1c1d94-6987-4658-a4dc-8821a30fe7e0",
             "alterId": 0
-#vmess
           }
         ]
       },
@@ -82,7 +80,6 @@
         "clients": [
           {
             "password": "1d1c1d94-6987-4658-a4dc-8821a30fe7e0"
-#trojanws
           }
         ],
         "udp": true
@@ -96,27 +93,6 @@
     },
     {
       "listen": "127.0.0.1",
-      "port": "10004",
-      "protocol": "shadowsocks",
-      "settings": {
-        "clients": [
-          {
-            "method": "aes-128-gcm",
-            "password": "1d1c1d94-6987-4658-a4dc-8821a30fe7e0"
-#ssws
-          }
-        ],
-        "network": "tcp,udp"
-      },
-      "streamSettings": {
-        "network": "ws",
-        "wsSettings": {
-          "path": "/ss-ws"
-        }
-      }
-    },
-    {
-      "listen": "127.0.0.1",
       "port": "10005",
       "protocol": "vless",
       "settings": {
@@ -124,7 +100,6 @@
         "clients": [
           {
             "id": "1d1c1d94-6987-4658-a4dc-8821a30fe7e0"
-#vlessgrpc
           }
         ]
       },
@@ -144,7 +119,6 @@
           {
             "id": "1d1c1d94-6987-4658-a4dc-8821a30fe7e0",
             "alterId": 0
-#vmessgrpc
           }
         ]
       },
@@ -164,7 +138,6 @@
         "clients": [
           {
             "password": "1d1c1d94-6987-4658-a4dc-8821a30fe7e0"
-#trojangrpc
           }
         ]
       },
@@ -172,27 +145,6 @@
         "network": "grpc",
         "grpcSettings": {
           "serviceName": "trojan-grpc"
-        }
-      }
-    },
-    {
-      "listen": "127.0.0.1",
-      "port": "10008",
-      "protocol": "shadowsocks",
-      "settings": {
-        "clients": [
-          {
-            "method": "aes-128-gcm",
-            "password": "1d1c1d94-6987-4658-a4dc-8821a30fe7e0"
-#ssgrpc
-          }
-        ],
-        "network": "tcp,udp"
-      },
-      "streamSettings": {
-        "network": "grpc",
-        "grpcSettings": {
-          "serviceName": "ss-grpc"
         }
       }
     }
@@ -335,27 +287,6 @@
       }
     ]
   },
-  "stats": {},
-  "api": {
-    "services": [
-      "StatsService"
-    ],
-    "tag": "api"
-  },
-  "policy": {
-    "levels": {
-      "0": {
-        "statsUserDownlink": true,
-        "statsUserUplink": true
-      }
-    },
-    "system": {
-      "statsInboundUplink": true,
-      "statsInboundDownlink": true,
-      "statsOutboundUplink": true,
-      "statsOutboundDownlink": true
-    }
-  },
   "dns": {
     "hosts": {
       "dns.google": "8.8.8.8",
@@ -366,24 +297,15 @@
     "servers": [
       {
         "address": "https://1.1.1.1/dns-query",
-        "domains": [
-          "geosite:geolocation-!cn"
-        ],
-        "expectIPs": [
-          "geoip:!cn"
-        ]
+        "domains": ["geosite:geolocation-!cn"],
+        "expectIPs": ["geoip:!cn"]
       },
       "8.8.8.8",
       {
         "address": "114.114.114.114",
         "port": 53,
-        "domains": [
-          "geosite:cn",
-          "geosite:category-games@cn"
-        ],
-        "expectIPs": [
-          "geoip:cn"
-        ],
+        "domains": ["geosite:cn", "geosite:category-games@cn"],
+        "expectIPs": ["geoip:cn"],
         "skipFallback": true
       },
       {
