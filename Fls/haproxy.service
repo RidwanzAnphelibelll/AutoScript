@@ -1,0 +1,21 @@
+[Unit]
+Description=HAProxy Load Balancer
+Documentation=https://github.com/RidwanzAnphelibelll
+After=network-online.target rsyslog.service
+Wants=network-online.target
+
+[Service]
+EnvironmentFile=-/etc/default/haproxy
+EnvironmentFile=-/etc/sysconfig/haproxy
+Environment="CONFIG=/etc/haproxy/haproxy.cfg" "PIDFILE=/run/haproxy.pid"
+ExecStartPre=/usr/sbin/haproxy -Ws -f \$CONFIG -c -q \$EXTRAOPTS
+ExecStart=/usr/sbin/haproxy -Ws -f \$CONFIG -p \$PIDFILE \$EXTRAOPTS
+ExecReload=/usr/sbin/haproxy -Ws -f \$CONFIG -c -q \$EXTRAOPTS
+ExecReload=/bin/kill -USR2 \$MAINPID
+KillMode=mixed
+Restart=always
+SuccessExitStatus=143
+Type=notify
+
+[Install]
+WantedBy=multi-user.target
