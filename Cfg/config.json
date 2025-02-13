@@ -4,6 +4,7 @@
     "error": "/var/log/xray/error.log",
     "access": "/var/log/xray/access.log"
   },
+  
   "api": {
     "services": [
       "HandlerService",
@@ -12,6 +13,7 @@
     ],
     "tag": "api"
   },
+  
   "stats": {},
   "policy": {
     "levels": {
@@ -96,27 +98,6 @@
     },
     {
       "listen": "127.0.0.1",
-      "port": "10004",
-      "protocol": "shadowsocks",
-      "settings": {
-        "clients": [
-          {
-            "method": "aes-128-gcm",
-            "password": "1d1c1d94-6987-4658-a4dc-8821a30fe7e0"
-#ssws
-          }
-        ],
-        "network": "tcp,udp"
-      },
-      "streamSettings": {
-        "network": "ws",
-        "wsSettings": {
-          "path": "/ss-ws"
-        }
-      }
-    },
-    {
-      "listen": "127.0.0.1",
       "port": "10005",
       "protocol": "vless",
       "settings": {
@@ -172,27 +153,6 @@
         "network": "grpc",
         "grpcSettings": {
           "serviceName": "trojan-grpc"
-        }
-      }
-    },
-    {
-      "listen": "127.0.0.1",
-      "port": "10008",
-      "protocol": "shadowsocks",
-      "settings": {
-        "clients": [
-          {
-            "method": "aes-128-gcm",
-            "password": "1d1c1d94-6987-4658-a4dc-8821a30fe7e0"
-#ssgrpc
-          }
-        ],
-        "network": "tcp,udp"
-      },
-      "streamSettings": {
-        "network": "grpc",
-        "grpcSettings": {
-          "serviceName": "ss-grpc"
         }
       }
     }
