@@ -1,0 +1,13 @@
+[Unit]
+Description=UDP Custom By @RidwanzSaputra
+
+[Service]
+User=root
+Type=simple
+ExecStart=/usr/bin/udp/udp server
+WorkingDirectory=/usr/bin/udp/
+Restart=always
+RestartSec=2s
+
+[Install]
+WantedBy=default.target
