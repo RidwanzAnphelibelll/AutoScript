@@ -1,0 +1,9 @@
+[Unit]
+Description=Limit Trojan IP Services
+ProjectAfter=network.target
+[Service]
+WorkingDirectory=/usr/bin
+ExecStart=/usr/bin/limit-ip trip
+Restart=always
+[Install]
+WantedBy=multi-user.target
