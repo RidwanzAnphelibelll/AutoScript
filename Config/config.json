@@ -11,8 +11,10 @@
       "LoggerService",
       "StatsService"
     ],
+    
     "tag": "api"
   },
+  
   "stats": {},
   "policy": {
     "levels": {
@@ -24,6 +26,7 @@
       }
     }
   },
+  
   "inbounds": [
     {
       "listen": "127.0.0.1",
@@ -32,8 +35,10 @@
       "settings": {
         "address": "127.0.0.1"
       },
+      
       "tag": "api"
     },
+    
     {
       "listen": "127.0.0.1",
       "port": "10001",
@@ -42,11 +47,12 @@
         "decryption": "none",
         "clients": [
           {
-            "id": "1d1c1d94-6987-4658-a4dc-8821a30fe7e0"
+            "id": "ebe3e608-818f-4b00-a797-834c96762285"
 #vless
           }
         ]
       },
+      
       "streamSettings": {
         "network": "ws",
         "wsSettings": {
@@ -54,6 +60,7 @@
         }
       }
     },
+    
     {
       "listen": "127.0.0.1",
       "port": "10002",
@@ -61,12 +68,13 @@
       "settings": {
         "clients": [
           {
-            "id": "1d1c1d94-6987-4658-a4dc-8821a30fe7e0",
+            "id": "ebe3e608-818f-4b00-a797-834c96762285",
             "alterId": 0
 #vmess
           }
         ]
       },
+      
       "streamSettings": {
         "network": "ws",
         "wsSettings": {
@@ -74,6 +82,7 @@
         }
       }
     },
+    
     {
       "listen": "127.0.0.1",
       "port": "10003",
@@ -82,12 +91,14 @@
         "decryption": "none",
         "clients": [
           {
-            "password": "1d1c1d94-6987-4658-a4dc-8821a30fe7e0"
+            "password": "ebe3e608-818f-4b00-a797-834c96762285"
 #trojanws
           }
         ],
+        
         "udp": true
       },
+      
       "streamSettings": {
         "network": "ws",
         "wsSettings": {
@@ -95,6 +106,7 @@
         }
       }
     },
+    
     {
       "listen": "127.0.0.1",
       "port": "10005",
@@ -103,11 +115,12 @@
         "decryption": "none",
         "clients": [
           {
-            "id": "1d1c1d94-6987-4658-a4dc-8821a30fe7e0"
+            "id": "ebe3e608-818f-4b00-a797-834c96762285"
 #vlessgrpc
           }
         ]
       },
+      
       "streamSettings": {
         "network": "grpc",
         "grpcSettings": {
@@ -115,6 +128,7 @@
         }
       }
     },
+    
     {
       "listen": "127.0.0.1",
       "port": "10006",
@@ -122,12 +136,13 @@
       "settings": {
         "clients": [
           {
-            "id": "1d1c1d94-6987-4658-a4dc-8821a30fe7e0",
+            "id": "ebe3e608-818f-4b00-a797-834c96762285",
             "alterId": 0
 #vmessgrpc
           }
         ]
       },
+      
       "streamSettings": {
         "network": "grpc",
         "grpcSettings": {
@@ -135,6 +150,7 @@
         }
       }
     },
+    
     {
       "listen": "127.0.0.1",
       "port": "10007",
@@ -143,11 +159,12 @@
         "decryption": "none",
         "clients": [
           {
-            "password": "1d1c1d94-6987-4658-a4dc-8821a30fe7e0"
+            "password": "ebe3e608-818f-4b00-a797-834c96762285"
 #trojangrpc
           }
         ]
       },
+      
       "streamSettings": {
         "network": "grpc",
         "grpcSettings": {
@@ -156,57 +173,71 @@
       }
     }
  ],
+ 
   "outbounds": [
+  
     {
       "protocol": "freedom",
       "settings": {},
       "tag": "direct"
     },
+    
     {
       "protocol": "blackhole",
       "settings": {},
       "tag": "blocked"
     },
+    
     {
       "protocol": "freedom",
       "settings": {},
       "tag": "proxy"
     },
+    
     {
       "protocol": "blackhole",
       "settings": {},
       "tag": "block"
     },
+    
     {
       "protocol": "blackhole",
       "settings": {},
       "tag": "reject"
     }
   ],
+  
   "routing": {
     "domainStrategy": "AsIs",
     "rules": [
+    
       {
         "inboundTag": [
           "dnsIn"
         ],
+        
         "outboundTag": "dnsOut",
         "type": "field"
       },
+      
       {
         "inboundTag": [
           "dnsQuery"
         ],
+        
         "outboundTag": "direct",
         "type": "field"
       },
+      
       {
         "outboundTag": "direct",
         "protocol": [
           "bittorrent"
         ],
+        
         "type": "field"
       },
+      
       {
         "type": "field",
         "outboundTag": "block",
@@ -227,13 +258,16 @@
           "fe80::/10"
         ]
       },
+      
       {
         "inboundTag": [
           "api"
         ],
+        
         "outboundTag": "api",
         "type": "field"
       },
+      
       {
         "type": "field",
         "outboundTag": "blocked",
@@ -241,6 +275,7 @@
           "bittorrent"
         ]
       },
+      
       {
         "type": "field",
         "outboundTag": "proxy",
@@ -262,6 +297,7 @@
           "geoip:twitter"
         ]
       },
+      
       {
         "type": "field",
         "outboundTag": "block",
@@ -282,6 +318,7 @@
           "fe80::/10"
         ]
       },
+      
       {
         "type": "field",
         "outboundTag": "direct",
@@ -296,6 +333,7 @@
           "geoip:private"
         ]
       },
+      
       {
         "type": "field",
         "outboundTag": "reject",
@@ -303,6 +341,7 @@
           "geosite:category-ads-all"
         ]
       },
+      
       {
         "type": "field",
         "outboundTag": "direct",
@@ -310,13 +349,16 @@
       }
     ]
   },
+  
   "stats": {},
   "api": {
     "services": [
       "StatsService"
     ],
+    
     "tag": "api"
   },
+  
   "policy": {
     "levels": {
       "0": {
@@ -324,6 +366,7 @@
         "statsUserUplink": true
       }
     },
+    
     "system": {
       "statsInboundUplink": true,
       "statsInboundDownlink": true,
@@ -331,6 +374,7 @@
       "statsOutboundDownlink": true
     }
   },
+  
   "dns": {
     "hosts": {
       "dns.google": "8.8.8.8",
@@ -338,16 +382,19 @@
       "dns.alidns.com": "223.5.5.5",
       "geosite:category-ads-all": "127.0.0.1"
     },
+    
     "servers": [
       {
         "address": "https://1.1.1.1/dns-query",
         "domains": [
           "geosite:geolocation-!cn"
         ],
+        
         "expectIPs": [
           "geoip:!cn"
         ]
       },
+      
       "8.8.8.8",
       {
         "address": "114.114.114.114",
@@ -356,11 +403,14 @@
           "geosite:cn",
           "geosite:category-games@cn"
         ],
+        
         "expectIPs": [
           "geoip:cn"
         ],
+        
         "skipFallback": true
       },
+      
       {
         "address": "localhost",
         "skipFallback": true
