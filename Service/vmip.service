@@ -1,9 +1,0 @@
-[Unit]
-Description=Limit Vmess IP Services
-ProjectAfter=network.target
-[Service]
-WorkingDirectory=/usr/bin
-ExecStart=/usr/bin/limit-ip vmip
-Restart=always
-[Install]
-WantedBy=multi-user.target
