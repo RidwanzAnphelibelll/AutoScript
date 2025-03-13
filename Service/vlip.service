@@ -1,9 +1,0 @@
-[Unit]
-Description=Limit Vless IP Services
-ProjectAfter=network.target
-[Service]
-WorkingDirectory=/usr/bin
-ExecStart=/usr/bin/limit-ip vlip
-Restart=always
-[Install]
-WantedBy=multi-user.target
