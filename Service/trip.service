@@ -1,11 +1,13 @@
 [Unit]
 Description=Limit Trojan IP Services
+Documentation=https://github.com/RidwanzAnphelibelll
 After=network.target
 
 [Service]
 Type=simple
 User=root
 ExecStart=/usr/local/bin/limit-ip-xray trip
+Environment=TERM=dumb
 Restart=always
 RestartSec=3
 
