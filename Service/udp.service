@@ -1,11 +1,13 @@
 [Unit]
 Description=UDP Custom By @RidwanzSaputra
+Documentation=https://github.com/RidwanzAnphelibelll
+After=network.target
 
 [Service]
 User=root
 Type=simple
-ExecStart=/usr/bin/udp/udp-custom server
 WorkingDirectory=/usr/bin/udp/
+ExecStart=/usr/bin/udp/udp-custom server
 Restart=always
 RestartSec=2s
 
