@@ -6,7 +6,7 @@ After=syslog.target network-online.target
 [Service]
 User=root
 NoNewPrivileges=true
-ExecStart=/usr/local/udpgw/badvpn --loglevel warning --listen-addr 127.0.0.1:7300
+ExecStart=/usr/local/udpgw/badvpn --loglevel warning --listen-addr 127.0.0.1:7300 --max-clients 1000
 Restart=on-failure
 RestartPreventExitStatus=23
 LimitNPROC=10000
