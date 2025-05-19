@@ -4,18 +4,19 @@
     "error": "/var/log/xray/error.log",
     "access": "/var/log/xray/access.log"
   },
-  
+
   "api": {
     "services": [
       "HandlerService",
       "LoggerService",
       "StatsService"
     ],
-    
+
     "tag": "api"
   },
-  
+
   "stats": {},
+
   "policy": {
     "levels": {
       "0": {
@@ -24,9 +25,16 @@
         "statsUserUplink": true,
         "statsUserDownlink": true
       }
+    },
+
+    "system": {
+      "statsInboundUplink": true,
+      "statsInboundDownlink": true,
+      "statsOutboundUplink": true,
+      "statsOutboundDownlink": true
     }
   },
-  
+
   "inbounds": [
     {
       "listen": "127.0.0.1",
@@ -35,10 +43,54 @@
       "settings": {
         "address": "127.0.0.1"
       },
-      
+
       "tag": "api"
     },
-    
+
+    {
+      "listen": "127.0.0.1",
+      "port": "10002",
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "rs",
+            "alterId": 0
+#vmess
+          }
+        ]
+      },
+
+      "streamSettings": {
+        "network": "ws",
+        "wsSettings": {
+          "path": "/vmess"
+        }
+      }
+    },
+
+    {
+      "listen": "127.0.0.1",
+      "port": "10006",
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "rs",
+            "alterId": 0
+#vmessgrpc
+          }
+        ]
+      },
+
+      "streamSettings": {
+        "network": "grpc",
+        "grpcSettings": {
+          "serviceName": "vmess-grpc"
+        }
+      }
+    },
+
     {
       "listen": "127.0.0.1",
       "port": "10001",
@@ -47,12 +99,12 @@
         "decryption": "none",
         "clients": [
           {
-            "id": "ebe3e608-818f-4b00-a797-834c96762285"
+            "id": "rs"
 #vless
           }
         ]
       },
-      
+
       "streamSettings": {
         "network": "ws",
         "wsSettings": {
@@ -60,53 +112,7 @@
         }
       }
     },
-    
-    {
-      "listen": "127.0.0.1",
-      "port": "10002",
-      "protocol": "vmess",
-      "settings": {
-        "clients": [
-          {
-            "id": "ebe3e608-818f-4b00-a797-834c96762285",
-            "alterId": 0
-#vmess
-          }
-        ]
-      },
-      
-      "streamSettings": {
-        "network": "ws",
-        "wsSettings": {
-          "path": "/vmess"
-        }
-      }
-    },
-    
-    {
-      "listen": "127.0.0.1",
-      "port": "10003",
-      "protocol": "trojan",
-      "settings": {
-        "decryption": "none",
-        "clients": [
-          {
-            "password": "ebe3e608-818f-4b00-a797-834c96762285"
-#trojanws
-          }
-        ],
-        
-        "udp": true
-      },
-      
-      "streamSettings": {
-        "network": "ws",
-        "wsSettings": {
-          "path": "/trojan-ws"
-        }
-      }
-    },
-    
+
     {
       "listen": "127.0.0.1",
       "port": "10005",
@@ -115,12 +121,12 @@
         "decryption": "none",
         "clients": [
           {
-            "id": "ebe3e608-818f-4b00-a797-834c96762285"
+            "id": "rs"
 #vlessgrpc
           }
         ]
       },
-      
+
       "streamSettings": {
         "network": "grpc",
         "grpcSettings": {
@@ -128,29 +134,31 @@
         }
       }
     },
-    
+
     {
       "listen": "127.0.0.1",
-      "port": "10006",
-      "protocol": "vmess",
+      "port": "10003",
+      "protocol": "trojan",
       "settings": {
+        "decryption": "none",
         "clients": [
           {
-            "id": "ebe3e608-818f-4b00-a797-834c96762285",
-            "alterId": 0
-#vmessgrpc
+            "password": "rs"
+#trojanws
           }
-        ]
+        ],
+
+        "udp": true
       },
-      
+
       "streamSettings": {
-        "network": "grpc",
-        "grpcSettings": {
-          "serviceName": "vmess-grpc"
+        "network": "ws",
+        "wsSettings": {
+          "path": "/trojan-ws"
         }
       }
     },
-    
+
     {
       "listen": "127.0.0.1",
       "port": "10007",
@@ -159,12 +167,12 @@
         "decryption": "none",
         "clients": [
           {
-            "password": "ebe3e608-818f-4b00-a797-834c96762285"
+            "password": "rs"
 #trojangrpc
           }
         ]
       },
-      
+
       "streamSettings": {
         "network": "grpc",
         "grpcSettings": {
@@ -172,72 +180,51 @@
         }
       }
     }
- ],
- 
+  ],
+
   "outbounds": [
-  
     {
       "protocol": "freedom",
-      "settings": {},
-      "tag": "direct"
+      "settings": {}
     },
-    
+
     {
       "protocol": "blackhole",
       "settings": {},
       "tag": "blocked"
-    },
-    
-    {
-      "protocol": "freedom",
-      "settings": {},
-      "tag": "proxy"
-    },
-    
-    {
-      "protocol": "blackhole",
-      "settings": {},
-      "tag": "block"
-    },
-    
-    {
-      "protocol": "blackhole",
-      "settings": {},
-      "tag": "reject"
     }
   ],
-  
+
   "routing": {
     "domainStrategy": "AsIs",
     "rules": [
-    
       {
         "inboundTag": [
           "dnsIn"
         ],
-        
+
         "outboundTag": "dnsOut",
         "type": "field"
       },
-      
+
       {
         "inboundTag": [
           "dnsQuery"
         ],
-        
+
         "outboundTag": "direct",
         "type": "field"
       },
-      
+
       {
         "outboundTag": "direct",
         "protocol": [
           "bittorrent"
         ],
-        
+
         "type": "field"
       },
-      
+
       {
         "type": "field",
         "outboundTag": "block",
@@ -258,16 +245,16 @@
           "fe80::/10"
         ]
       },
-      
+
       {
         "inboundTag": [
           "api"
         ],
-        
+
         "outboundTag": "api",
         "type": "field"
       },
-      
+
       {
         "type": "field",
         "outboundTag": "blocked",
@@ -275,7 +262,7 @@
           "bittorrent"
         ]
       },
-      
+
       {
         "type": "field",
         "outboundTag": "proxy",
@@ -297,7 +284,7 @@
           "geoip:twitter"
         ]
       },
-      
+
       {
         "type": "field",
         "outboundTag": "block",
@@ -318,7 +305,7 @@
           "fe80::/10"
         ]
       },
-      
+
       {
         "type": "field",
         "outboundTag": "direct",
@@ -333,7 +320,7 @@
           "geoip:private"
         ]
       },
-      
+
       {
         "type": "field",
         "outboundTag": "reject",
@@ -341,7 +328,7 @@
           "geosite:category-ads-all"
         ]
       },
-      
+
       {
         "type": "field",
         "outboundTag": "direct",
@@ -349,32 +336,7 @@
       }
     ]
   },
-  
-  "stats": {},
-  "api": {
-    "services": [
-      "StatsService"
-    ],
-    
-    "tag": "api"
-  },
-  
-  "policy": {
-    "levels": {
-      "0": {
-        "statsUserDownlink": true,
-        "statsUserUplink": true
-      }
-    },
-    
-    "system": {
-      "statsInboundUplink": true,
-      "statsInboundDownlink": true,
-      "statsOutboundUplink": true,
-      "statsOutboundDownlink": true
-    }
-  },
-  
+
   "dns": {
     "hosts": {
       "dns.google": "8.8.8.8",
@@ -382,19 +344,19 @@
       "dns.alidns.com": "223.5.5.5",
       "geosite:category-ads-all": "127.0.0.1"
     },
-    
+
     "servers": [
       {
         "address": "https://1.1.1.1/dns-query",
         "domains": [
           "geosite:geolocation-!cn"
         ],
-        
+
         "expectIPs": [
           "geoip:!cn"
         ]
       },
-      
+
       "8.8.8.8",
       {
         "address": "114.114.114.114",
@@ -403,14 +365,14 @@
           "geosite:cn",
           "geosite:category-games@cn"
         ],
-        
+
         "expectIPs": [
           "geoip:cn"
         ],
-        
+
         "skipFallback": true
       },
-      
+
       {
         "address": "localhost",
         "skipFallback": true
