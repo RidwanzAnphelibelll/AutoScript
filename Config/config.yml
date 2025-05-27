@@ -1,7 +1,8 @@
-verbose: 1
+verbose: 0
+
 listen:
   - target_host: 127.0.0.1
-    target_port: 109
+    target_port: 143
     listen_port: 10015
 
   - target_host: 127.0.0.1
