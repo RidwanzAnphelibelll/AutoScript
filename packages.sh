@@ -12,7 +12,7 @@ sudo gem install lolcat
 
 packages=(
   
-  cmake jq at unzip p7zip-full
+  cmake jq at unzip gzip p7zip-full
   
   netfilter-persistent xz-utils fail2ban
   
