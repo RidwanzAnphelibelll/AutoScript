@@ -1,9 +1,10 @@
+
 ## AutoScript.
 
 ### Install :
 
 ```
-wget -q https://raw.githubusercontent.com/RidwanzAnphelibelll/AutoScript/main/setup.sh && chmod +x setup.sh && ./setup.sh
+apt update -y && apt upgrade -y && apt install -y screen && wget -q https://raw.githubusercontent.com/RidwanzAnphelibelll/AutoScript/main/setup.sh && chmod +x setup.sh && screen -dmS RS ./setup.sh
 ```
 ### Update :
 
