@@ -1,0 +1,16 @@
+[Unit]
+Description=WebSocket Proxy
+Documentation=https://github.com/RidwanzAnphelibelll
+After=syslog.target network-online.target
+
+[Service]
+User=root
+NoNewPrivileges=true
+ExecStart=/usr/bin/ws -f /usr/bin/config.yml
+Restart=on-failure
+RestartPreventExitStatus=23
+LimitNPROC=10000
+LimitNOFILE=1000000
+
+[Install]
+WantedBy=multi-user.target
